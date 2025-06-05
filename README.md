@@ -46,6 +46,7 @@ This will:
 
 # Project Structure
 
+```
 mlp-diabetes-classifier/
 │
 ├── config.yaml          # Experiment settings
@@ -65,7 +66,7 @@ mlp-diabetes-classifier/
 │   └── utils.py         # (Optional) Helper functions
 │
 └── run_all.py           # Runs train.py then evaluate.py
-
+```
 # Dependencies 
 
 - Python 3.7+
