@@ -7,6 +7,7 @@ verbose: 2
 
 data_path: "data/diabetes.csv"
 model_output_path: "models"
+checkpoints_output_path: "checkpoints"
 
 search:
   units_list: [8, 12, 16, 32]

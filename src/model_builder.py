@@ -16,4 +16,5 @@ def build_model(input_dim: int, units: int = 12, learning_rate: float = 0.001):
         optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
         metrics=["accuracy"]
     )
+
     return model

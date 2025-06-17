@@ -19,7 +19,8 @@ RANDOM_SEARCH_ITER = int(_config.get("random_search_iter", 10))
 VERBOSE = int(_config.get("verbose", 2))
 
 DATA_PATH = _config.get("data_path", "data/diabetes.csv")
-MODEL_OUTPUT_DIR = _config.get("model_output_dir", "models")
+MODEL_OUTPUT_DIR = _config.get("model_output_path", "models")
+CHECKPOINTS_DIR = _config.get("checkpoints_outputh_path", "checkpoints")
 
 search_cfg = _config.get("search", {})
 UNITS_LIST = search_cfg.get("units_list", [])
