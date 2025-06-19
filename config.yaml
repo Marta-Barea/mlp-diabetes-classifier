@@ -9,8 +9,10 @@ data_path: "data/diabetes.csv"
 model_output_path: "models"
 checkpoints_output_path: "checkpoints"
 
+droput_rate: 0.1
+
 search:
   units_list: [8, 12, 16, 32]
   lr_list: [0.0001, 0.001, 0.01]
-  epochs_list: [100, 150]
+  epochs_list: [100, 150, 200]
   batch_size_list: [16, 32, 64]
