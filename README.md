@@ -69,7 +69,7 @@ mlp-diabetes-classifier/
 # Dependencies 
 
 - Python 3.7+
-- numpy, scikt-learn, tensorflow, scikeras, joblib, PyYAML
+- numpy, scikt-learn, tensorflow, scikeras, PyYAML, matplotlib. 
 
 With Conda:
 
