@@ -22,6 +22,8 @@ DATA_PATH = _config.get("data_path", "data/diabetes.csv")
 MODEL_OUTPUT_DIR = _config.get("model_output_path", "models")
 CHECKPOINTS_DIR = _config.get("checkpoints_outputh_path", "checkpoints")
 
+DROPOUT_RATE = float(_config.get("dropout_rate", 0.1))
+
 search_cfg = _config.get("search", {})
 UNITS_LIST = search_cfg.get("units_list", [])
 LR_LIST = search_cfg.get("lr_list", [])

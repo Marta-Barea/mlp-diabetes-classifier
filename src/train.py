@@ -9,10 +9,11 @@ from sklearn.model_selection import RandomizedSearchCV
 
 from .config import (
     SEED, UNITS_LIST, LR_LIST, EPOCHS_LIST, BATCH_SIZE_LIST, RANDOM_SEARCH_ITER,
-    CV_FOLDS, VERBOSE, MODEL_OUTPUT_DIR, CHECKPOINTS_DIR
+    CV_FOLDS, VERBOSE, MODEL_OUTPUT_DIR, CHECKPOINTS_DIR, DROPOUT_RATE
 )
 from .data_loader import load_data
 from .model_builder import build_model
+from .utils.plot_metrics import plot_metrics
 
 
 def trainer():
@@ -26,7 +27,8 @@ def trainer():
 
     base_mlp = KerasClassifier(
         model=build_model,
-        input_dim=input_dim
+        input_dim=input_dim,
+        dropout_rate=DROPOUT_RATE
     )
 
     param_dist = {
@@ -59,7 +61,8 @@ def trainer():
     final_model = build_model(
         input_dim=input_dim,
         units=best_params["model__units"],
-        learning_rate=best_params["model__learning_rate"]
+        learning_rate=best_params["model__learning_rate"],
+        dropout_rate=DROPOUT_RATE
     )
 
     checkpoint_cb = tf.keras.callbacks.ModelCheckpoint(
@@ -72,7 +75,7 @@ def trainer():
     )
 
     print("🚀 Training final model...")
-    final_model.fit(
+    results = final_model.fit(
         X_train, y_train,
         validation_split=0.2,
         epochs=best_params["epochs"],
@@ -80,6 +83,8 @@ def trainer():
         callbacks=[checkpoint_cb],
         verbose=1
     )
+
+    plot_metrics(results)
 
     final_model.load_weights(ckpt_path)
 
