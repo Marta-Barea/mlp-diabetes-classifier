@@ -10,4 +10,5 @@ services:
     volumes:
       - ./reports:/app/reports
       - ./models:/app/models
+      - .checkpoints:/app/checkpoints
     command: python run_all.py
