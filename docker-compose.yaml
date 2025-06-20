@@ -1,0 +1,13 @@
+version: '2.3'
+
+services:
+  mlp-diabetes:
+    image: mlp-diabetes:latest
+    container_name: mlp-diabetes
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./reports:/app/reports
+      - ./models:/app/models
+    command: python run_all.py
