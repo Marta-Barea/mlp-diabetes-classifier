@@ -13,13 +13,24 @@ git clone https://github.com/yourusername/mlp-diabetes-classifier.git
 cd mlp-diabetes-classifier
 ```
 
-2. Create a Conda enviornment
+2. Set up the Conda environment
 
 It is included an `environment.yml` for Conda users: 
 
 ```bash 
 conda env create -f environment.yml
 conda activate mlp-diabetes
+```
+
+# Dependencies 
+
+- Python 3.7+
+- numpy, scikt-learn, tensorflow, scikeras, PyYAML, matplotlib. 
+
+You can also install them with:
+
+```bash
+pip install -r requirements.txt
 ```
 
 # Usage
@@ -41,8 +52,9 @@ python run_all.py
 This will: 
 
 - Train de MLP with randomized hyperparameter search
-- Save the best model to `models/best_mlp.pk`
-- Evaluate and print train/test accuracy and sample predictions
+- Save the best model to `models/best_mlp.h5`
+- Print train/test accuracy and predictions
+- Save evaluation plots to `reports/`
 
 # Project Structure
 
@@ -51,6 +63,11 @@ mlp-diabetes-classifier/
 │
 ├── config.yaml          # Experiment settings
 ├── environment.yml      # Conda environment spec
+├── requirements.txt     # Pinned pip dependencies (for Docker)
+├── docker-compose.yml   # Docker Compose setup
+├── Dockerfile           # Image build definition
+├── .dockerignore        # Exclude files from image context
+├── .gitignore           # Exclude files from Git tracking
 │
 ├── data/
 │   └── diabetes.csv     # Pima Indians Diabetes Dataset
@@ -65,15 +82,35 @@ mlp-diabetes-classifier/
 │   └── evaluate.py      # Loads model & prints metrics
 │
 └── run_all.py           # Runs train.py then evaluate.py
+
 ```
-# Dependencies 
 
-- Python 3.7+
-- numpy, scikt-learn, tensorflow, scikeras, PyYAML, matplotlib. 
+# Dockerized Support
 
-With Conda:
+This project is fully containerized for portability and reproducibility.
 
-```bash 
-conda env create -f environment.yml
-conda activate mlp-diabetes
+## Docker Dependencies 
+
+Before using Docker, you need to have the following installed locally on your system:
+
+- [Docker Engine](https://docs.docker.com/get-started/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+✅ Note: These tools are required only if you want to run the project in a containerized environment. If you're using Conda, Docker is optional.
+
+## How to Run 
+
+To build the image and run the project inside a container:
+
+```bash
+docker-compose up --build
 ```
+
+This will:
+
+- Build the Docker image using the included Dockerfile
+- Run the run_all.py pipeline (training + evaluation)
+- Save the best trained model in the models/ directory
+- Save plots and metrics in the reports/ directory
+
+✅ Note: Both models/ and reports/ are mounted to your host machine, so your outputs are preserved outside the container.
