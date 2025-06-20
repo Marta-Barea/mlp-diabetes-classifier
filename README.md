@@ -74,6 +74,9 @@ mlp-diabetes-classifier/
 │
 ├── models/              # (Auto-created) Trained model & params
 │
+├── reports/
+│   └── figures          # (Auto-created) Plots
+│
 ├── src/
 │   ├── config.py        # Loads config.yaml
 │   ├── data_loader.py   # Reads & splits data
