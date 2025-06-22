@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 1. Verify the dataset
 
-The [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/mathchi/diabetes-data-set) from Kaggle is already included under data/diabetes.csv.
+The [Pima Indians Diabetes Dataset](https://www.kaggle.com/datasets/mathchi/diabetes-data-set) from Kaggle is already included under `data/diabetes.csv`.
 
 2. Adjust settings
 
@@ -119,8 +119,8 @@ This will:
 
 - Build the Docker image using the included Dockerfile
 - Run the run_all.py pipeline (training + evaluation)
-- Save the best trained model in the models/ directory
-- Save plots and metrics in the reports/ directory
+- Save the best trained model in the `models/` directory
+- Save plots and metrics in the `reports/` directory
 
 ✅ Note: Both `models/`and `reports/` are mounted to your host machine, so your outputs are preserved outside the container.
 
