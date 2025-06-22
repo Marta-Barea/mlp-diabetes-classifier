@@ -5,7 +5,7 @@ import numpy as np
 
 from .data_loader import load_data
 from .utils.plot_confusion_matrix import plot_confusion_matrix
-from .config import MODEL_OUTPUT_DIR
+from .config import MODEL_OUTPUT_DIR, REPORTS_DIR
 
 
 def get_latest_model(directory: str | Path, pattern: str = "best_mlp_*.h5") -> str | None:
@@ -17,7 +17,7 @@ def get_latest_model(directory: str | Path, pattern: str = "best_mlp_*.h5") -> s
     return str(files[0]) if files else None
 
 
-def evaluator(model_path: str | None = None):
+def evaluator(model_path: str | None = None, output_dir: str | Path = None):
     X_train, X_test, y_train, y_test = load_data()
 
     model_path = model_path or get_latest_model(MODEL_OUTPUT_DIR)
@@ -41,8 +41,11 @@ def evaluator(model_path: str | None = None):
     for i in range(10):
         print(f"     Predicted: {y_pred[i]}, Actual: {int(y_test[i])}")
 
+    output_dir = Path(output_dir or REPORTS_DIR)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
     print("\n📊 Plotting confusion matrix...")
-    plot_confusion_matrix(model, X_test, y_test)
+    plot_confusion_matrix(model, X_test, y_test, output_dir=output_dir)
 
 
 if __name__ == "__main__":
