@@ -9,18 +9,23 @@ from sklearn.model_selection import RandomizedSearchCV
 
 from .config import (
     SEED, UNITS_LIST, LR_LIST, EPOCHS_LIST, BATCH_SIZE_LIST, RANDOM_SEARCH_ITER,
-    CV_FOLDS, VERBOSE, MODEL_OUTPUT_DIR, CHECKPOINTS_DIR, DROPOUT_RATE
+    CV_FOLDS, VERBOSE, MODEL_OUTPUT_DIR, CHECKPOINTS_DIR, DROPOUT_RATE, REPORTS_DIR
 )
 from .data_loader import load_data
 from .model_builder import build_model
 from .utils.plot_metrics import plot_metrics
 
 
-def trainer():
+def trainer(model_dir=None, checkpoint_dir=None, reports_dir=None):
     random.seed(SEED)
     np.random.seed(SEED)
     tf.keras.utils.set_random_seed(SEED)
     tf.config.experimental.enable_op_determinism()
+
+    model_dir = Path(model_dir or MODEL_OUTPUT_DIR)
+    checkpoint_dir = Path(checkpoint_dir or CHECKPOINTS_DIR)
+    reports_dir = Path(reports_dir or REPORTS_DIR)
+    reports_dir.mkdir(parents=True, exist_ok=True)
 
     X_train, _, y_train, _ = load_data()
     input_dim = X_train.shape[1]
@@ -54,7 +59,7 @@ def trainer():
     print("🔍 Best hyperparameters:", best_params)
 
     run_ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    ckpt_dir = Path(CHECKPOINTS_DIR)
+    ckpt_dir = Path(checkpoint_dir)
     ckpt_dir.mkdir(parents=True, exist_ok=True)
     ckpt_path = ckpt_dir / f"best_val_acc_{run_ts}.weights.h5"
 
@@ -84,12 +89,12 @@ def trainer():
         verbose=1
     )
 
-    plot_metrics(results)
+    plot_metrics(results, output_dir=reports_dir)
 
     final_model.load_weights(ckpt_path)
 
     out_ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    model_out_dir = Path(MODEL_OUTPUT_DIR)
+    model_out_dir = Path(model_dir)
     model_out_dir.mkdir(parents=True, exist_ok=True)
 
     final_model_path = model_out_dir / f"best_mlp_{out_ts}.h5"
