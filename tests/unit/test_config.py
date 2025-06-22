@@ -14,6 +14,7 @@ def test_config_paths_are_strings():
     assert isinstance(config.DATA_PATH, str)
     assert isinstance(config.MODEL_OUTPUT_DIR, str)
     assert isinstance(config.CHECKPOINTS_DIR, str)
+    assert isinstance(config.REPORTS_DIR, str)
 
 
 def test_config_lists_are_loaded():
