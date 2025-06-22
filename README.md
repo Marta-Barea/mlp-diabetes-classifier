@@ -122,7 +122,7 @@ This will:
 - Save the best trained model in the models/ directory
 - Save plots and metrics in the reports/ directory
 
-✅ Note: Both models/ and reports/ are mounted to your host machine, so your outputs are preserved outside the container.
+✅ Note: Both `models/`and `reports/` are mounted to your host machine, so your outputs are preserved outside the container.
 
 
 # Testing
