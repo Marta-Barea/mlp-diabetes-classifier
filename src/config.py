@@ -21,6 +21,7 @@ VERBOSE = int(_config.get("verbose", 2))
 DATA_PATH = _config.get("data_path", "data/diabetes.csv")
 MODEL_OUTPUT_DIR = _config.get("model_output_path", "models")
 CHECKPOINTS_DIR = _config.get("checkpoints_outputh_path", "checkpoints")
+REPORTS_DIR = _config.get("reports_output_path", "reports")
 
 DROPOUT_RATE = float(_config.get("dropout_rate", 0.1))
 
