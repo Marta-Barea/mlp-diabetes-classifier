@@ -137,9 +137,9 @@ pytest
 
 This will automatically discover and run:
 
-- Unit tests (tests/unit/)
-- Integration tests (tests/integration/)
-- End-to-End tests (tests/e2e/)
+- Unit tests (`tests/unit/`)
+- Integration tests (`tests/integration/`)
+- End-to-End tests (`tests/e2e/`)
 
 ## Run a specific group
 
